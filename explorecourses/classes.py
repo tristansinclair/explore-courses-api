@@ -42,6 +42,8 @@ class Department(object):
         self.name = elem.get("longname")
         self.code = elem.get("name")
 
+    def default(self):
+        return self.__dict__
 
     def __str__(self):
         """
@@ -78,6 +80,8 @@ class School(object):
         depts = elem.findall("department")
         self.departments = tuple(Department(dept) for dept in depts)
 
+    def default(self):
+        return self.__dict__
 
     def get_department(self, idf: str) -> Department:
         """
@@ -145,7 +149,9 @@ class Instructor(object):
         self.sunet_id = elem.findtext("sunet")
         self.is_primary_instructor = elem.findtext("role") == "PI"
 
-
+    def default(self):
+        return self.__dict__
+    
     def __str__(self):
         """
         Returns a string representation of the Instructor that includes the 
@@ -186,6 +192,8 @@ class Attribute(object):
         self.catalog_print = elem.findtext("catalogPrint") == "true"
         self.schedule_print = elem.findtext("schedulePrint") == "true"
 
+    def default(self):
+        return self.__dict__
 
     def __str__(self):
         """
@@ -230,7 +238,9 @@ class Schedule(object):
         self.instructors = tuple(Instructor(instr) for instr 
                                  in elem.find("instructors"))
 
-
+    def default(self):
+        return self.__dict__
+    
     def __str__(self):
         """
         Returns a string representation of the Schedule that includes the 
@@ -293,7 +303,9 @@ class Section(object):
         self.attributes = tuple(Attribute(attr) for attr 
                                 in elem.find("attributes"))
 
-
+    def default(self):
+        return self.__dict__
+    
     def __str__(self):
         """
         Returns a string representation of the Section that includes the 
@@ -327,6 +339,8 @@ class Tag(object):
         self.organization = elem.findtext("organization")
         self.name = elem.findtext("name")
 
+    def default(self):
+        return self.__dict__
 
     def __str__(self):
         """
@@ -360,6 +374,9 @@ class LearningObjective(object):
         self.code = elem.findtext(".//requirementCode")
         self.description = elem.findtext(".//description")
 
+
+    def default(self):
+        return self.__dict__
 
     def __str__(self):
         """
@@ -462,6 +479,8 @@ class Course(object):
         self.max_units_repeat = int(elem.findtext(".//maxUnitsRepeat"))
         self.max_times_repeat = int(elem.findtext(".//maxTimesRepeat"))
 
+    def default(self):
+        return self.__dict__
 
     def __str__(self):
         """
